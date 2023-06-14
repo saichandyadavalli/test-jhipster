@@ -21,7 +21,7 @@ jobs:
         with:
           java-version: '17'
           distribution: 'temurin'
-          cache: maven
+          
           
       - name: Install JHipster
         run: npm install -g generator-jhipster
@@ -33,7 +33,7 @@ jobs:
 
       - name: Build with Maven
         run: | 
-           mvn -B package --file pom.xml
+           mvn -B package
 
       - name: Set up AWS CLI
         uses: aws-actions/configure-aws-credentials@v1
