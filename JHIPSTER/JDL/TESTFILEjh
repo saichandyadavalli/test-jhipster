@@ -1,14 +1,52 @@
-entity Book {
-  title String required
-  publicationDate LocalDate
-  price Double
+application {
+  config {
+    baseName myapp,
+    packageName com.mycompany.myapp,
+    applicationType microservice,
+    databaseType sql,
+    devDatabaseType postgresql,
+    prodDatabaseType postgresql,
+    searchEngine elasticsearch,
+    buildTool maven
+  }
 }
 
-entity Author {
+entity Post {
+  title String required,
+  content TextBlob
+}
+
+entity Comment {
+  text TextBlob required
+}
+
+entity Tag {
   name String required
-  birthDate LocalDate
+}
+
+entity User {
+  username String required,
+  email String required
+}
+
+entity Bill {
+  amount Integer required,
+  paidAt ZonedDateTime required
+}
+
+relationship OneToMany {
+  Post to Comment,
+  User to Bill
+}
+
+relationship ManyToOne {
+  Comment{post} to Post
 }
 
 relationship ManyToMany {
-  Book{authors} to Author{books}
+  Post{tag(name)} to Tag{post}
+}
+
+relationship OneToOne {
+  User{favoritePost} to Post{user}
 }
