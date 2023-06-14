@@ -1,0 +1,54 @@
+name: JHipster Workflow
+
+on:
+  create:
+    branches:
+      - 'main'
+
+jobs:
+  generate_and_deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set up JDK
+        uses: actions/setup-java@v2
+        with:
+          java-version: '11'
+
+      - name: Install JHipster
+        run: npm install -g generator-jhipster
+
+      - name: Generate code
+        run: |
+          # Replace 'jhipster-jdl-file.jdl' with the actual JDL file name
+          jhipster import-jdl jhipster-jdl-file.jdl
+
+      - name: Build and package
+        run: |
+          ./mvnw package -Pprod -DskipTests
+
+      - name: Set up AWS CLI
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: us-east-1
+
+      - name: Deploy to AWS EKS
+        run: |
+          # Replace 'your-eks-cluster-name' with the actual EKS cluster name
+          aws eks update-kubeconfig --region us-east-1 --name your-eks-cluster-name
+          kubectl apply -f deployment.yml
+
+      - name: Deploy RDS PostgreSQL
+        run: |
+          # Replace 'your-postgresql-configuration' with the actual PostgreSQL configuration
+          aws rds create-db-instance --db-instance-identifier your-postgresql-configuration --engine postgres --allocated-storage 20 --db-instance-class db.t2.micro --master-username master --master-user-password password
+
+      - name: Deploy AWS Elasticsearch
+        run: |
+          # Replace 'your-elasticsearch-configuration' with the actual Elasticsearch configuration
+          aws es create-domain --domain-name your-elasticsearch-configuration --elasticsearch-version 7.9 --elasticsearch-cluster-config InstanceType=t2.small.elasticsearch,InstanceCount=1
