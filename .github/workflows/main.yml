@@ -33,7 +33,7 @@ jobs:
       - name: Build with Maven
         run: | 
           chmod +x mvnw
-          ./mvnw clean org.apache.maven.plugins:maven-compiler-plugin:compile package -Pprod
+          ./mvnw clean org.apache.maven.plugins:maven-compiler-plugin:2.0.2:compile package -Pprod
       - name: Run tests
         run: |
           ./mvnw test
