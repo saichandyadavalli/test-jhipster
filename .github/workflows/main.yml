@@ -52,4 +52,4 @@ jobs:
       - name: Deploy AWS Elasticsearch
         run: |
           # Replace 'your-elasticsearch-configuration' with the actual Elasticsearch configuration
-          aws es create-domain --domain-name your-elasticsearch-configuration --elasticsearch-version 7.9 --elasticsearch-cluster-config InstanceType=t2.small.elasticsearch,InstanceCount=1
+          aws es create-domain --domain-name jhipster-eks --elasticsearch-version 7.9 --elasticsearch-cluster-config InstanceType=t2.small.elasticsearch,InstanceCount=1
