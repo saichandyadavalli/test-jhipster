@@ -47,16 +47,20 @@ jobs:
       - name: Deploy RDS PostgreSQL
         run: |
           # Replace 'your-postgresql-configuration' with the actual PostgreSQL configuration
-          aws rds --region ap-south-1 create-db-instance --db-instance-identifier test-jh-eks3 --engine postgres --allocated-storage 20 --db-instance-class DB.m5d.large --master-username master --master-user-password password
+          aws rds --region ap-south-1 create-db-instance --db-instance-identifier test-jh-eks4 --engine postgres --allocated-storage 20 --db-instance-class DB.m5d.large --master-username master --master-user-password password
 
       - name: Deploy Amazon OpenSearch Service
         run: |
           # Replace 'your-opensearch-configuration' with the actual OpenSearch domain configuration
           aws opensearch create-domain 	jhipster-eks your-opensearch-configuration --version 1.0
-      - name: Commit and push if it's not a pull request
+
+      - name: Configure Git
         run: |
-          git config --local user.email "sai@vaidhyamegha.com"
-          git config --local user.name "saichandyadavalli"
-          git add -A
-          git commit -m "Add changes from JHipster generation" -a
-          git push
+          git config --global user.name "saichandyadavalli"
+          git config --global user.email "sai@vaidhyamegha.com"
+
+      - name: Commit and push changes
+        run: |
+          git add .
+          git commit -m "Generated code"
+          git push origin HEAD:main
