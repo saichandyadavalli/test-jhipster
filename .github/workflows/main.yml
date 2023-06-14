@@ -47,7 +47,7 @@ jobs:
       - name: Deploy RDS PostgreSQL
         run: |
           # Replace 'your-postgresql-configuration' with the actual PostgreSQL configuration
-          aws rds --region ap-south-1 create-db-instance --db-instance-identifier test-jh-eks --engine postgres --allocated-storage 20 --db-instance-class DB.m5d.large --master-username admin --master-user-password password
+          aws rds --region ap-south-1 create-db-instance --db-instance-identifier test-jh-eks --engine postgres --allocated-storage 20 --db-instance-class DB.m5d.large --master-username master --master-user-password password
 
       - name: Deploy AWS Elasticsearch
         run: |
