@@ -24,7 +24,7 @@ jobs:
       - name: Generate code
         run: |
           # Replace 'jhipster-jdl-file.jdl' with the actual JDL file name
-          jhipster import-jdl jhipster-jdl-file.jdl
+          jhipster import-jdl TESTFILE.jdl
 
       - name: Build and package
         run: |
