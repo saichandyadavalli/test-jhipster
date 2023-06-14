@@ -1,9 +1,8 @@
 name: JHipster Workflow
 
 on:
-  create:
-    branches:
-      - 'main'
+  push:
+    branches: [ main ]
 
 jobs:
   generate_and_deploy:
