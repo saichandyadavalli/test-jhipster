@@ -21,6 +21,7 @@ jobs:
         with:
           java-version: '17'
           distribution: 'temurin'
+          cache: maven
           
       - name: Install JHipster
         run: npm install -g generator-jhipster
