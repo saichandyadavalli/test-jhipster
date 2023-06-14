@@ -42,7 +42,7 @@ jobs:
         run: |
           # Replace 'your-eks-cluster-name' with the actual EKS cluster name
           aws eks update-kubeconfig --region ap-south-1 --name vaidhyamegha-eks
-          kubectl apply -f kubernetes/deployment.yml
+          kubectl apply -f deployment.yml
 
       - name: Deploy RDS PostgreSQL
         run: |
