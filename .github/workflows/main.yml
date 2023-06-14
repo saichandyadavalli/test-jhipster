@@ -30,9 +30,9 @@ jobs:
           # Replace 'jhipster-jdl-file.jdl' with the actual JDL file name
           jhipster import-jdl TESTFILE.jdl
 
-      - name: Build and package
-        run: |
-          ./mvnw package -Pprod -DskipTests
+      - name: Build with Maven
+        run: | 
+          mvn --batch-mode --update-snapshots package
 
       - name: Set up AWS CLI
         uses: aws-actions/configure-aws-credentials@v1
