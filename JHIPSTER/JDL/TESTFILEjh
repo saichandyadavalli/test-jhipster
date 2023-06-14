@@ -1,0 +1,14 @@
+entity Book {
+  title String required
+  publicationDate LocalDate
+  price Double
+}
+
+entity Author {
+  name String required
+  birthDate LocalDate
+}
+
+relationship ManyToMany {
+  Book{authors} to Author{books}
+}
