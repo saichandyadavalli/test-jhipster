@@ -18,6 +18,9 @@ jobs:
           
       - name: Install JHipster
         run: npm install -g generator-jhipster
+      - name: Set executable permissions for mvnw
+        run: |
+          chmod +x mvnw
 
       - name: Generate code
         run: |
