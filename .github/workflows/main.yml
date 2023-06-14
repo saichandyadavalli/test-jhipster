@@ -32,7 +32,8 @@ jobs:
 
       - name: Build with Maven
         run: | 
-          mvn install
+          chmod +x mvnw
+          ./mvnw clean package -Pprod
 
       - name: Set up AWS CLI
         uses: aws-actions/configure-aws-credentials@v1
